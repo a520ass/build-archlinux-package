@@ -47,20 +47,6 @@ fi
 
 echo "::group::Install build dependencies"
 
-# Install build dependencies
-(
-	# Run "source PKGBUILD" in a subshell
-	source PKGBUILD
-	# Install build dependencies with yay
-	yay -S ${makedepends[*]} ${depends[*]} --needed --noconfirm --mflags "--nocheck --skippgpcheck"
-)
-
-# Install extra build dependencies
-EXTRA_BUILD_DEPENDENCIES_CMDLINE="$(echo "$EXTRA_BUILD_DEPENDENCIES" | xargs)"
-if [[ "$EXTRA_BUILD_DEPENDENCIES_CMDLINE" != "" ]]; then
-	sudo pacman -S $EXTRA_BUILD_DEPENDENCIES_CMDLINE --needed --noconfirm
-fi
-
 echo "::endgroup::"
 
 echo "::group::Build packages"
